@@ -1,9 +1,30 @@
 'use strict';
 
 module.exports = {
-  development: {},
+  development: {
+    client: 'postgresql',
+    connection: 'postgres://localhost/bookshelf_dev',
+    pool: {
+      min: 1,
+      max: 1
+    }
+  },
 
-  test: {},
+  test: {
+    client: 'postgresql',
+    connection: 'postgres://localhost/bookshelf_dev',
+    pool: {
+      min: 1,
+      max: 1
+    }
+  },
 
-  production: {}
+  production: {
+    client: 'postgresql',
+    connection: 'postgres://localhost/bookshelf_dev',
+    pool: {
+      min: 1,
+      max: 1
+    }
+  }
 };

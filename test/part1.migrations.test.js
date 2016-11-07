@@ -10,7 +10,10 @@ const knex = require('../knex');
 
 suite('part1 migrations', () => {
   before((done) => {
-    knex.migrate.latest()
+    knex.migrate.rollback()
+    .then(function(){
+      return knex.migrate.latest()
+    })
       .then(() => {
         done();
       })
