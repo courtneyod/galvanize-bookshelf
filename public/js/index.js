@@ -7,7 +7,7 @@
     .done((books) => {
       const $books = $('#books');
       console.log(books)
-      for (const book of Array.from(books.body)) {
+      for (const book of Array.from(books)) {
         const $anchor = $('<a>')
           .attr({
             href: `/book.html?id=${book.id}`,
