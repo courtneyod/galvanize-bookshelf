@@ -9,10 +9,10 @@ exports.up = function(knex, Promise) {
   table.string('author').notNullable().defaultTo("");
   table.string('genre').notNullable().defaultTo("");
   table.text('description').defaultTo('').notNullable();
-  table.text('cover_url', 'medium').notNullable().defaultTo("");
-  //table.timestamp('created_at').notNullable().defaultTo(knex.fn.now());
-  //table.timestamp('created_at').notNullable().defaultTo(knex.fn.now());
-  table.timestamps(true, true);
+  table.text('coverUrl', 'medium').notNullable().defaultTo("");
+  table.timestamp('createdAt').notNullable().defaultTo(knex.fn.now());
+  table.timestamp('updatedAt').notNullable().defaultTo(knex.fn.now());
+  //table.timestamps(true, true);
     })
   ])
 };

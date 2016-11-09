@@ -149,7 +149,7 @@ suite('part2 routes', () => {
         delete res.body.updatedAt;
       })
       .expect(200, {
-        id: 9,
+        id: 24,
         title: 'Think Python',
         author: 'Allen B. Downey',
         genre: 'Python',
@@ -170,7 +170,7 @@ suite('part2 routes', () => {
         author: 'Allen B. Downey',
         genre: 'Python stuff',
         description: 'More Python',
-        coverUrl: 'https://s3-us-west-2.amazonaws.com/assessment-images/galvanize_reads/photos/think_python.jpg'
+        cover_url: 'https://s3-us-west-2.amazonaws.com/assessment-images/galvanize_reads/photos/think_python.jpg'
       })
       .expect('Content-Type', /json/)
       .expect((res) => {
@@ -183,7 +183,7 @@ suite('part2 routes', () => {
         author: 'Allen B. Downey',
         genre: 'Python stuff',
         description: 'More Python',
-        coverUrl: 'https://s3-us-west-2.amazonaws.com/assessment-images/galvanize_reads/photos/think_python.jpg'
+        cover_url: 'https://s3-us-west-2.amazonaws.com/assessment-images/galvanize_reads/photos/think_python.jpg'
       }, done);
 
       /* eslint-enable max-len */
@@ -200,6 +200,7 @@ suite('part2 routes', () => {
         delete res.body.updatedAt;
       })
       .expect(200, {
+        id: 1,
         title: 'JavaScript, The Good Parts',
         author: 'Douglas Crockford',
         genre: 'JavaScript',

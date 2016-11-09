@@ -12,7 +12,7 @@ module.exports = {
 
   test: {
     client: 'postgresql',
-    connection: 'postgres://localhost/bookshelf_dev',
+    connection: 'postgres://localhost/bookshelf_test',
     pool: {
       min: 1,
       max: 1

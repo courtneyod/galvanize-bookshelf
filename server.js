@@ -1,5 +1,6 @@
 'use strict';
 
+process.env.NODE_ENV = process.env.NODE_ENV || 'development'
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config();
 }
@@ -33,20 +34,28 @@ const path = require('path');
 app.use(express.static(path.join('public')));
 
 // CSRF protection
-app.use((req, res, next) => {
-  if (/json/.test(req.get('Accept'))) {
-    return next();
-  }
+//console.log(process.env.NODE_ENV)
+if(process.env.NODE_ENV !== 'development'){
+  app.use((req, res, next) => {
+    //console.log(req.get('Accept'))
+    if (/json/.test(req.get('Accept'))) {
+      return next();
+    }
 
-  res.sendStatus(406);
-});
+    res.sendStatus(406);
+  });
+}
 
 const books = require('./routes/books');
 const favorites = require('./routes/favorites');
 const token = require('./routes/token');
 const users = require('./routes/users');
 
-app.use(books);
+app.get("/", function(req, res){
+  res.send("woohoo")
+})
+
+app.use('/books', books);
 app.use(favorites);
 app.use(token);
 app.use(users);
@@ -69,7 +78,7 @@ app.use((err, _req, res, _next) => {
   res.sendStatus(500);
 });
 
-const port = process.env.PORT || 8000;
+const port = process.env.PORT || 3000;
 
 app.listen(port, () => {
   if (app.get('env') !== 'test') {

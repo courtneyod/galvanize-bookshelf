@@ -6,8 +6,8 @@
   $.getJSON('/books')
     .done((books) => {
       const $books = $('#books');
-
-      for (const book of books) {
+      console.log(books)
+      for (const book of Array.from(books.body)) {
         const $anchor = $('<a>')
           .attr({
             href: `/book.html?id=${book.id}`,
