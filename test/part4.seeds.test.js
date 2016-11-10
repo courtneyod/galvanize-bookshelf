@@ -51,6 +51,7 @@ suite('part4 seeds', () => {
         done();
       })
       .catch((err) => {
+        console.log(err, 'this is err')
         done(err);
       });
   });

@@ -56,9 +56,16 @@ app.get("/", function(req, res){
 })
 
 app.use('/books', books);
-app.use(favorites);
-app.use(token);
+app.use('/favorites', favorites);
+app.use('/token',token);
 app.use('/users', users);
+
+//Update the cookie session secret to use the secret key in the JWT_SECRET environment variable.
+app.use(cookieSession({
+  name: 'trackify',
+  secret: process.env.JWT_SECRET
+}));
+
 
 app.use((_req, res) => {
   res.sendStatus(404);

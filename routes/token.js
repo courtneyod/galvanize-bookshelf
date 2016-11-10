@@ -1,9 +1,10 @@
 'use strict';
 
 const express = require('express');
-
-// eslint-disable-next-line new-cap
 const router = express.Router();
+var knex = require('../knex');
+const bcrypt = require('bcrypt-as-promised');
+const boom = require('boom');
 
 // YOUR CODE HERE
 
