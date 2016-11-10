@@ -48,8 +48,8 @@ suite('part4 routes token', () => {
       .expect('set-cookie', /token=[a-zA-Z0-9\-_]+\.[a-zA-Z0-9\-_]+\.[a-zA-Z0-9\-_]+; Path=\/;.+HttpOnly/)
       .expect('Content-Type', /json/)
       .expect((res) => {
-        delete res.body.createdAt;
-        delete res.body.updatedAt;
+        delete res.body.created_at;
+        delete res.body.updated_at;
       })
       .expect(200, {
         id: 1,

@@ -59,7 +59,7 @@ In the `routes/books.js` module, update the middleware to handle the following H
 | `POST`         | `/books`            | `{ "author": "", ... }`      | `400`           | `Author must not be blank`      |
 | `POST`         | `/books`            | `{ "genre": "", ... }`       | `400`           | `Genre name must not be blank`  |
 | `POST`         | `/books`            | `{ "description": "", ... }` | `400`           | `Description must not be blank` |
-| `POST`         | `/books`            | `{ "coverUrl": "", ... }`    | `400`           | `Cover URL must not be blank`   |
+| `POST`         | `/books`            | `{ "cover_url": "", ... }`    | `400`           | `Cover URL must not be blank`   |
 | `PATCH`        | `/books/9000`       | N/A                          | `404`           | `Not Found`                     |
 | `PATCH`        | `/books/-1`         | N/A                          | `404`           | `Not Found`                     |
 | `PATCH`        | `/books/one`        | N/A                          | `404`           | `Not Found`                     |

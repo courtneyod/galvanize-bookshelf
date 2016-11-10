@@ -84,6 +84,7 @@ suite('part1 migrations', () => {
         };
 
         for (const column in expected) {
+
           assert.deepEqual(
             actual[column],
             expected[column],

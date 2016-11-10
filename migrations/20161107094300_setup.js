@@ -3,16 +3,16 @@
 
 exports.up = function(knex, Promise) {
   return Promise.all([
-  knex.schema.createTable('books', function(table){
-  table.increments();
-  table.string('title').notNullable().defaultTo("");
-  table.string('author').notNullable().defaultTo("");
-  table.string('genre').notNullable().defaultTo("");
-  table.text('description').defaultTo('').notNullable();
-  table.text('coverUrl', 'medium').notNullable().defaultTo("");
-  table.timestamp('createdAt').notNullable().defaultTo(knex.fn.now());
-  table.timestamp('updatedAt').notNullable().defaultTo(knex.fn.now());
-  //table.timestamps(true, true);
+    knex.schema.createTable('books', function(table){
+      table.increments();
+      table.string('title').notNullable().defaultTo("");
+      table.string('author').notNullable().defaultTo("");
+      table.string('genre').notNullable().defaultTo("");
+      table.text('description').defaultTo('').notNullable();
+      table.text('cover_url', 'medium').notNullable().defaultTo("");
+      table.timestamp('created_at').notNullable().defaultTo(knex.fn.now());
+      table.timestamp('updated_at').notNullable().defaultTo(knex.fn.now());
+      //table.timestamps(true, true);
     })
   ])
 };

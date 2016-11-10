@@ -58,7 +58,7 @@ app.get("/", function(req, res){
 app.use('/books', books);
 app.use(favorites);
 app.use(token);
-app.use(users);
+app.use('/users', users);
 
 app.use((_req, res) => {
   res.sendStatus(404);

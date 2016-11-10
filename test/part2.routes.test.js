@@ -1,3 +1,4 @@
+
 'use strict';
 
 process.env.NODE_ENV = 'test';
@@ -198,7 +199,6 @@ suite('part2 routes', () => {
         delete res.body.updatedAt;
       })
       .expect(200, {
-        id: 1,
         title: 'JavaScript, The Good Parts',
         author: 'Douglas Crockford',
         genre: 'JavaScript',

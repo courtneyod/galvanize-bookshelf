@@ -1,18 +1,18 @@
 'use strict';
 
 const express = require('express');
-
-// eslint-disable-next-line new-cap
 const router = express.Router();
 var knex = require('../knex');
+const {camelizeKeys, decamelizeKeys} = require('humps');
+
 
 router.get('/', function(req, res, next){
 	knex('books').orderBy('title', 'asc')
 	.then(function(results){
-
-		if(results){
+		const books = camelizeKeys(results);
+		if(books){
 			//console.log(results, 'here are the results')
-			res.json(results);
+			res.json(books);
 		} else {
 			throw new Error('error with results');
 		}
@@ -24,9 +24,9 @@ router.get('/', function(req, res, next){
 router.get('/:id', function(req, res, next){
 	knex('books').where('id', req.params.id).orderBy('title', 'desc').first()
 	.then(function(results){
-		//console.log(results)
+		const books = camelizeKeys(results);
 		if(results){
-			res.json(results);
+			res.json(books);
 		} else {
 			throw new Error('error with results');
 		}
@@ -43,8 +43,8 @@ router.post('/', function(req, res, next){
 	if(!req.body.title){
 		emptyError = 'Title must not be blank'
 	} else if(!req.body.genre){
-		emptyError = 'Genre name must not be blank'
-	} else if (!req.body.coverUrl){
+		emptyError = 'Genre must not be blank'
+	} else if (!req.body.cover_url){
 		emptyError = 'Cover URL must not be blank'
 	} else if (!req.body.description){
 		emptyError = 'Description must not be blank'
@@ -53,16 +53,24 @@ router.post('/', function(req, res, next){
 	} else {
 		emptyError = 'no error'
 	}
-	knex('books').insert(req.body).returning(['title', 'author', 'genre', 'description', 'coverUrl'])
-	.then(function(results){
-	//console.log(results, 'posstttt')
-		if(results){
-			res.json(results[0]);
+
+	const newBook = decamelizeKeys(req.body);
+
+  knex('books').insert(newBook).returning(['title', 'author', 'genre', 'description', 'cover_url'])
+    .then((row) => {
+			if (emptyError){
+				throw new Error(emptyError);
+			}
+			if (row){
+				console.log(row)
+			const book = camelizeKeys(row);
+      res.json(book[0]);
 		} else {
 			throw new Error('error with adding a new book');
 		}
 	}).catch(function(err){
-		//console.log(emptyError, 'this is emptyError \n\n\n\n\n\n\n\n\n')
+		//console.log('POST ERROR: ', err);
+		console.log(emptyError, "this is emptyError", "\n\n\n\n\n\n\n\n\n")
 		res.set('Content-Type', 'text/plain');
 		res.status(400);
 		res.send(emptyError);
@@ -71,10 +79,12 @@ router.post('/', function(req, res, next){
 
 router.patch('/:id', function(req, res){
 //	console.log(req.body, 'this is reqxk')
-  knex('books').where('id', req.params.id).update(req.body).returning(['title', 'author', 'genre', 'description', 'coverUrl'])
+	const newBook = decamelizeKeys(req.body);
+  knex('books').where('id', req.params.id).update(newBook).returning(['title', 'author', 'genre', 'description', 'cover_url'])
     .then(function(book){
     if (book) {
-			res.json(book[0]);
+			const books = camelizeKeys(book);
+			res.json(books[0]);
     } else {
 			throw new Error('error with updating a new book');
 		}
@@ -86,13 +96,14 @@ router.patch('/:id', function(req, res){
 });
 
 router.delete('/:id', function(req, res){
-	knex('books').where('id', req.params.id).del().returning('*')
+	knex('books').where('id', req.params.id).del().returning(['title', 'author', 'genre', 'description', 'cover_url'])
 	.then(function(results){
 		if(results.length === 0){
 			throw new Error(err)
 		}
 		if(results){
-			res.json(results[0])
+			const books = camelizeKeys(results);
+			res.json(books[0])
 		} else {
 			throw new Error(err)
 		}

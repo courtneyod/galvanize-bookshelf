@@ -47,11 +47,11 @@ suite('part3 routes', () => {
       })
       .expect('Content-Type', /json/)
       .expect((res) => {
-        delete res.body.createdAt;
-        delete res.body.updatedAt;
+        delete res.body.created_at;
+        delete res.body.updated_at;
       })
       .expect(200, {
-        id: 2,
+        id: 4,
         firstName: 'John',
         lastName: 'Siracusa',
         email: 'john.siracusa@gmail.com'
@@ -62,7 +62,7 @@ suite('part3 routes', () => {
         }
 
         knex('users')
-          .where('id', 2)
+          .where('id', 4)
           .first()
           .then((user) => {
             const hashedPassword = user.hashed_password;
@@ -72,7 +72,7 @@ suite('part3 routes', () => {
             delete user.updated_at;
 
             assert.deepEqual(user, {
-              id: 2,
+              id: 4,
               first_name: 'John',
               last_name: 'Siracusa',
               email: 'john.siracusa@gmail.com'
