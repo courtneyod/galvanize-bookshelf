@@ -19,7 +19,7 @@ router.get('/', function(req, res, next){
 	}
 })
 
-router.post('', function(req, res, next){
+router.post('/', function(req, res, next){
 	const { email, password } = req.body;
 
 	if (!email || !email.trim()) {
@@ -54,11 +54,8 @@ router.post('', function(req, res, next){
 		    httpOnly: true
 		  };
   		res.cookie('/token', 'cookiemonster.something.somwhing', opts);
-			//req.session.views = 0;
-		//	console.log(res.cookie, "court")
 
 			if (user, "this is user right before send"){
-				//console.log(user);
 				res.status(200)
 				res.json(user);
 		} else {
