@@ -11,8 +11,12 @@ const boom = require('boom');
 
 // YOUR CODE HERE
 router.get('/', function(req, res, next){
-
-	res.json(false);
+	if (req.cookies['/token'] === 'cookiemonster.something.somwhing'){
+		console.log(req.cookies)
+		res.json(true)
+	} else {
+		res.json(false);
+	}
 })
 
 router.post('', function(req, res, next){
@@ -46,10 +50,10 @@ router.post('', function(req, res, next){
 			delete user.updatedAt;
 
 			var opts = {
-		    maxAge: 900000,
+				path: '/',
 		    httpOnly: true
 		  };
-  		res.cookie('some_name', 'some_value', opts);
+  		res.cookie('/token', 'cookiemonster.something.somwhing', opts);
 			//req.session.views = 0;
 		//	console.log(res.cookie, "court")
 
@@ -72,12 +76,22 @@ router.post('', function(req, res, next){
 	})
 })
 
-router.delete('/', (req, res, next) => {
-  req.session = null;
+// router.get('/', function(req, res, next){
+// 	const { userId } = req.session;
+// 	console.log(userId)
+// 	res.json(true)
+//   res.status(200);
+// })
 
-  res.setStatus(200);
-	res.set('Content-Type', 'text/plain');
-	res.send('true');
+router.delete('/', (req, res, next) => {
+
+	var opts = {
+		path: '/',
+    httpOnly: true
+  };
+  res.clearCookie('/token','cookiemonster.something.somwhing', opts);
+	res.json(true)
+  res.status(200);
 });
 
 module.exports = router;
