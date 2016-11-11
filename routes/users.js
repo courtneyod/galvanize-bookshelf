@@ -47,7 +47,7 @@ router.post('/', function(req, res, next){
       delete user.createdAt;
       delete user.updatedAt;
 
-			if (user, "this is user reght before send"){
+			if (user, "this is user right before send"){
 			console.log(user);
       res.json(user);
 		} else {

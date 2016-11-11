@@ -9,7 +9,7 @@ const express = require('express');
 const app = express();
 
 app.disable('x-powered-by');
-
+const cookieSession = require('cookie-session')
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser')
 const morgan = require('morgan');
@@ -62,7 +62,7 @@ app.use('/users', users);
 
 //Update the cookie session secret to use the secret key in the JWT_SECRET environment variable.
 app.use(cookieSession({
-  name: 'trackify',
+  name: 'session',
   secret: process.env.JWT_SECRET
 }));
 

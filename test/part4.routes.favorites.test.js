@@ -56,8 +56,8 @@ suite('part4 routes favorites', () => {
         .expect('Content-Type', /json/)
         .expect(200, [{
           id: 1,
-          bookId: 1,
-          userId: 1,
+          book_id: 1,
+          user_id: 1,
           created_at: '2016-06-26T14:26:16.000Z',
           updated_at: '2016-06-26T14:26:16.000Z',
           title: 'JavaScript, The Good Parts',
@@ -135,7 +135,7 @@ suite('part4 routes favorites', () => {
         });
     });
 
-    test('GET /favorites', (done) => {
+    test('GET /favorites easy', (done) => {
       request(server)
         .get('/favorites')
         .set('Accept', 'application/json')
